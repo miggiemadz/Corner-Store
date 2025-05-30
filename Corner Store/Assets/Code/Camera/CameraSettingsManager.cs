@@ -1,16 +1,37 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraSettingsManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private CameraSettings cameraSettings;
+    [SerializeField] private Toggle shoulderCameraToggle;
+
+    [Header("FOV Slider")]
+    [SerializeField] private Slider FOVSlider;
+    [SerializeField] private TextMeshProUGUI FOVValueText;
+
     void Start()
     {
-        
+        shoulderCameraToggle = GameObject.Find("CameraShoulderToggle").GetComponent<Toggle>();
+        FOVSlider = GameObject.Find("FOVSlider").GetComponent<Slider>();
+        FOVValueText = GameObject.Find("FOVValueText").GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Camera Shoulder Toggle
+        if (shoulderCameraToggle.isOn)
+        {
+            cameraSettings.ShoulderSide = 1;
+        }
+        else
+        {
+            cameraSettings.ShoulderSide = 0;
+        }
+
+        // FOV Slider
+        cameraSettings.FOV = FOVSlider.value;
+        FOVValueText.text = cameraSettings.FOV.ToString();
     }
 }
