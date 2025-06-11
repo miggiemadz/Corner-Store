@@ -502,9 +502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e791a0cf759e6d45b06cb8ace86ff03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  maxSpeed: 4.5
   jumpSpeed: 5
-  camera: {fileID: 330585546}
+  Camera: {fileID: 330585546}
   charController: {fileID: 531402179}
 --- !u!143 &531402179
 CharacterController:
