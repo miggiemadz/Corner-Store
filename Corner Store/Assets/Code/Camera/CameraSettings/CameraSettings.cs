@@ -3,9 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CameraSettingsManager", menuName = "Scriptable Objects/CameraSettingsManager")]
 public class CameraSettings : ScriptableObject
 {
+    private enum cameraPOVs
+    {
+        FirstPerson,
+        ThirdPersonBehind,
+        ThirdPersonFront
+    }
+
     [Header("Universal Settings")]
-    private int shoulderSide = 1; // Component: Camera Side. Values: 1 (right), 0 (Left)
+    private float shoulderSide = .75f; // Component: Camera Side. Values: 1 (right), 0 (Left)
     private float fOV = 60f; // Component: Lens(Vertical FOV), Values: 60 - 90
+    private cameraPOVs currentPOV;
 
     [Header("MnK Settings")]
     private float cameraSensitivityXMNK;
@@ -18,8 +26,10 @@ public class CameraSettings : ScriptableObject
     private float controllerDeadZoneY;
 
     // Universal
-    public int ShoulderSide { get => shoulderSide; set => shoulderSide = value; }
+    public float ShoulderSide { get => shoulderSide; set => shoulderSide = value; }
     public float FOV { get => fOV; set => fOV = value; }
+    private cameraPOVs CurrentPOV { get => currentPOV; set => currentPOV = value; }
+
 
     // MnK
     public float CameraSensitivityXMNK { get => cameraSensitivityXMNK; set => cameraSensitivityXMNK = value; }

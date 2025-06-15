@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        settingsMenu = GameObject.Find("SettingsMenu");
+
     }
 
     void Update()
