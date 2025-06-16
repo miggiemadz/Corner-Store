@@ -504,6 +504,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 4.5
   jumpSpeed: 5
+  gravity: -9.8
+  lookSensX: 1
+  lookSensY: 1
+  minAngleY: -90
+  maxAngleY: 90
   Camera: {fileID: 330585546}
   charController: {fileID: 531402179}
 --- !u!143 &531402179
