@@ -8,7 +8,7 @@ public class TPBCameraController : MonoBehaviour
 {
     [Header("Universal")]
     [SerializeField] private CameraSettings cameraSettings;
-    [SerializeField] private InputActionReference cameraInput;
+    [SerializeField] private InputActionReference lookInput;
 
     [Header("Cinemachine Components")]
     [SerializeField] private CinemachineCamera TPBPlayerCamera;
@@ -31,7 +31,9 @@ public class TPBCameraController : MonoBehaviour
 
     void Update()
     {
-        MNKCameraMovement();
+        Debug.Log(cameraSettings.LastInputDeviceType);
+
+        CameraMovement();
 
         // Camera Shoudler
         TPBCameraOffset.Offset.x = cameraSettings.ShoulderSide;
@@ -40,25 +42,36 @@ public class TPBCameraController : MonoBehaviour
         TPBPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
     }
 
-    private void MNKCameraMovement()
+    private void CameraMovement()
     {
-        float mouseMovementX = cameraInput.action.ReadValue<Vector2>().x;
-        float mouseMovementY = cameraInput.action.ReadValue<Vector2>().y;
+        float lookMovementX = lookInput.action.ReadValue<Vector2>().x;
+        float lookMovementY = lookInput.action.ReadValue<Vector2>().y;
 
-        Debug.Log(mouseMovementX + " " + mouseMovementY);
+        if (Input.GetMouseButton(1) && cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MouseInput)
+        {
+           if (Mathf.Abs(lookMovementX) > 0)
+           {
+               TPBPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+           }
 
-        if (Input.GetMouseButton(1) || Gamepad.all.Count > 0) 
-        { 
-            if (Mathf.Abs(mouseMovementX) > 4)
-            {
-                Debug.Log("Moving camera right");
-                TPBPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(mouseMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
-            }
+           if (Mathf.Abs(lookMovementY) > 0)
+           {
+               TPBPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+           }
+        }
+            
+        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.ControllerInput)
+        {
+           if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
+           {
+               TPBPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+           }
 
-            if (Mathf.Abs(mouseMovementY) > 4)
-            {
-                TPBPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(mouseMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
-            }
+           if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight)
+           {
+               TPBPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+           }
+        
         }
     }
 }

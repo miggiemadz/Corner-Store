@@ -22,10 +22,10 @@ public class CameraSettingsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI controllerSensitivityXValueText;
     [SerializeField] private Slider controllerSensitivityYSlider;
     [SerializeField] private TextMeshProUGUI controllerSensitivityYValueText;
-    [SerializeField] private Slider controllerDeadZoneXSlider;
-    [SerializeField] private TextMeshProUGUI controllerDeadZoneXValueText;
-    [SerializeField] private Slider controllerDeadZoneYSlider;
-    [SerializeField] private TextMeshProUGUI controllerDeadZoneYValueText;
+    [SerializeField] private Slider controllerDeadZoneLeftSlider;
+    [SerializeField] private TextMeshProUGUI controllerDeadZoneLeftValueText;
+    [SerializeField] private Slider controllerDeadZoneRightSlider;
+    [SerializeField] private TextMeshProUGUI controllerDeadZoneRightValueText;
     [SerializeField] private Slider controllerDeadZoneUniversalSlider;
     [SerializeField] private TextMeshProUGUI controllerDeadZoneUniversalValueText;
 
@@ -66,18 +66,23 @@ public class CameraSettingsManager : MonoBehaviour
 
         if (universalDeadZoneToggle.isOn)
         {
-            cameraSettings.ControllerDeadZoneX = controllerDeadZoneUniversalSlider.value;
-            controllerDeadZoneUniversalValueText.text = cameraSettings.ControllerDeadZoneX.ToString();
-            cameraSettings.ControllerDeadZoneY = controllerDeadZoneUniversalSlider.value;
-            controllerDeadZoneUniversalValueText.text = cameraSettings.ControllerDeadZoneY.ToString();
+            controllerDeadZoneUniversalSlider.gameObject.SetActive(true);
+            controllerDeadZoneLeftSlider.gameObject.SetActive(false);
+            controllerDeadZoneRightSlider.gameObject.SetActive(false);
+            cameraSettings.ControllerDeadZoneLeft = controllerDeadZoneUniversalSlider.value;
+            controllerDeadZoneUniversalValueText.text = cameraSettings.ControllerDeadZoneLeft.ToString();
+            cameraSettings.ControllerDeadZoneRight = controllerDeadZoneUniversalSlider.value;
+            controllerDeadZoneUniversalValueText.text = cameraSettings.ControllerDeadZoneRight.ToString();
         }
         else
         {
             controllerDeadZoneUniversalSlider.gameObject.SetActive(false);
-            cameraSettings.ControllerDeadZoneX = controllerDeadZoneXSlider.value;
-            controllerDeadZoneXValueText.text = cameraSettings.ControllerDeadZoneX.ToString();
-            cameraSettings.ControllerDeadZoneY = controllerDeadZoneYSlider.value;
-            controllerDeadZoneYValueText.text = cameraSettings.ControllerDeadZoneY.ToString();
+            controllerDeadZoneLeftSlider.gameObject.SetActive(true);
+            controllerDeadZoneRightSlider.gameObject.SetActive(true);
+            cameraSettings.ControllerDeadZoneLeft = controllerDeadZoneLeftSlider.value;
+            controllerDeadZoneLeftValueText.text = cameraSettings.ControllerDeadZoneLeft.ToString();
+            cameraSettings.ControllerDeadZoneRight = controllerDeadZoneRightSlider.value;
+            controllerDeadZoneRightValueText.text = cameraSettings.ControllerDeadZoneRight.ToString();
         }
     }
 }
