@@ -1,3 +1,4 @@
+using System.IO.IsolatedStorage;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ public class CameraSettingsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI controllerDeadZoneRightValueText;
     [SerializeField] private Slider controllerDeadZoneUniversalSlider;
     [SerializeField] private TextMeshProUGUI controllerDeadZoneUniversalValueText;
+    [SerializeField] private GameObject[] controllerInputTypes;
+    [SerializeField] private Button controllerInputSwitchButton;
 
     void Start()
     {
@@ -35,9 +38,15 @@ public class CameraSettingsManager : MonoBehaviour
         FOVSlider = GameObject.Find("FOVSlider").GetComponent<Slider>();
         FOVValueText = GameObject.Find("FOVValueText").GetComponent<TextMeshProUGUI>();
     }
+    private void Awake()
+    {
+        controllerInputSwitchButton.onClick.AddListener(OnButtonClicked);
+    }
 
     void Update()
     {
+        if (controllerInputSwitchButton)
+
         // Camera Shoulder Toggle
         if (shoulderCameraToggle.isOn)
         {
@@ -84,5 +93,51 @@ public class CameraSettingsManager : MonoBehaviour
             cameraSettings.ControllerDeadZoneRight = controllerDeadZoneRightSlider.value;
             controllerDeadZoneRightValueText.text = cameraSettings.ControllerDeadZoneRight.ToString();
         }
+    }
+    
+    public void OnButtonClicked()
+    {
+        Debug.Log("Clicked");
+
+        int currentActive = 0;
+
+        for (int i = 0; i < controllerInputTypes.Length; i++)
+        {
+            if (controllerInputTypes[i].activeInHierarchy)
+            {
+                currentActive = i;
+            }
+        }
+
+        controllerInputTypes[currentActive].SetActive(false);
+
+        if (currentActive < 3)
+        {
+            currentActive++;
+            controllerInputTypes[currentActive].SetActive(true);
+        }
+        else
+        {
+            currentActive = 0;
+            controllerInputTypes[currentActive ].SetActive(true);
+        }
+
+        switch (currentActive)
+        {
+            case 0:
+                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.PS4;
+                break;
+            case 1:
+                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.PS5;
+                break;
+            case 2: 
+                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.XBox;
+                break;
+            case 3:
+                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.Switch;
+                break;
+        }
+
+        Debug.Log(currentActive);
     }
 }

@@ -31,8 +31,6 @@ public class TPBCameraController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(cameraSettings.LastInputDeviceType);
-
         CameraMovement();
 
         // Camera Shoudler

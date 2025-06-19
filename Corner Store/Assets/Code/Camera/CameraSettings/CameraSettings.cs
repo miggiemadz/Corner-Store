@@ -16,27 +16,38 @@ public class CameraSettings : ScriptableObject
         MouseInput
     }
 
+    public enum ControllerType
+    {
+        PS4,
+        PS5,
+        XBox,
+        Switch
+    }
+
     [Header("Universal Settings")]
     private float shoulderSide = .75f; // Component: Camera Side. Values: 1 (right), 0 (Left)
     private float fOV = 60f; // Component: Lens(Vertical FOV), Values: 60 - 90
     private CameraPOVs currentPOV;
     private InputDeviceTypes lastInputDeviceType;
+    private ControllerType currentControllerType;
 
     [Header("MnK Settings")]
-    private float cameraSensitivityXMNK;
-    private float cameraSensitivityYMNK;
+    private float cameraSensitivityXMNK = 0.1f;
+    private float cameraSensitivityYMNK = 0.1f;
 
     [Header("Controller Settings")]
-    private float cameraSensitivityXController;
-    private float cameraSensitivityYController;
-    private float controllerDeadZoneLeft;
-    private float controllerDeadZoneRight;
+    private float cameraSensitivityXController = 0.1f;
+    private float cameraSensitivityYController = 0.1f;
+    private float controllerDeadZoneLeft = 0.1f;
+    private float controllerDeadZoneRight = 0.1f;
 
     // Universal
     public float ShoulderSide { get => shoulderSide; set => shoulderSide = value; }
     public float FOV { get => fOV; set => fOV = value; }
     public CameraPOVs CurrentPOV { get => currentPOV; set => currentPOV = value; }
     public InputDeviceTypes LastInputDeviceType { get => lastInputDeviceType; set => lastInputDeviceType = value; }
+    public ControllerType CurrentControllerType { get => currentControllerType; set => currentControllerType = value; }
+
 
 
     // MnK
