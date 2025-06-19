@@ -505,8 +505,8 @@ MonoBehaviour:
   maxSpeed: 4.5
   jumpSpeed: 5
   gravity: -9.8
-  lookSensX: 1
-  lookSensY: 1
+  lookSensX: 4
+  lookSensY: 4
   minAngleY: -90
   maxAngleY: 90
   Camera: {fileID: 330585546}

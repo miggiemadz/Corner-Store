@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class testController : MonoBehaviour
 {
-    [Header("Movement Variables")]
+    [Header("Player Movement Variables")]
     private Vector3 moveDirection; // the movement vector that gets it's values based on user input
     public float maxSpeed = 3.5f;
     public float jumpSpeed = 5f;
@@ -14,13 +14,13 @@ public class testController : MonoBehaviour
     public float gravity = -9.8f; //default gravity in unity
 
     [Header("Cam Movement Variables")]
-    //private float lookDirection;
     //cam sensitivity
     public float lookSensX = 1f;
     public float lookSensY = 1f;
-    //to limit player's looking angle
+    //limit player's looking angle (prevents player frm looking up & over their back)
     public float minAngleY = -90f;
     public float maxAngleY = 90f;
+    private float verticalLookRotation = 0f; //to rotate player cam between clamped y-values(added: 6/18)
 
     [Header("Other Variables")]
     [SerializeField] Transform Camera; //reference player/main camera (or use cinemachine?)
@@ -36,12 +36,14 @@ public class testController : MonoBehaviour
     }
 
     // Update is called once per frame
+    //[System.Obsolete]
     void Update()
     {
+        //player movement
         float horizontalMovement = Input.GetAxis("Horizontal"); //WASD controls (edit>projSettings>InputManager)
         float verticalMovement = Input.GetAxis("Vertical");
         moveDirection = (transform.forward * verticalMovement + transform.right * horizontalMovement).normalized; //move across the vector3 accoring to user input
-        charController.Move(maxSpeed * Time.deltaTime * moveDirection);
+        charController.Move(maxSpeed * Time.deltaTime * moveDirection); //move char w consideration of playerSpeed&time
 
         //or use...
         //Vector3 inputDirection = transform.forward * moveDirection.y + transform.right * moveDirection.x;
@@ -50,33 +52,28 @@ public class testController : MonoBehaviour
         //charController.Move(inputDirection * maxSpeed * Time.deltaTime);
 
 
-        //Camera movement (not working yet)
+        //Camera movement (6/19: slightly working now :))
         if (Camera != null) //make sure player cam exists
         {
-            float mouseX = Input.GetAxis("Mouse X"); //mouse X-axis movement (edit>projSettings>MouseX)
-            float mouseY = Input.GetAxis("Mouse Y");
-            //Vector3 lookDirection = new Vector3(mouseX * lookSensX, mouseY * lookSensY, ???);
-            Vector2 lookDirection = new Vector2(mouseX * lookSensX, mouseY * lookSensY); //creates a vector2 with X&Y's that correspond to user's mouse movement&sens
-            //Camera.Rotate(lookDirection); //rotate player's cam according to ^
-            //should I normalize???(ln 59) -> Vector2 lookDirection = new Vector2(mouseX * lookSensX, mouseY * lookSensY).normalized;
-            //or...
-            //transform.rotation *= Quaternion.AngleAxis(lookDirection, Vector3.up);
-            transform.localEulerAngles = lookDirection; //(using either this method or one on ln 60)
-            Camera.Rotate(lookDirection, Space.World); //use space.self or space.world?
+            //define/get player input and apply look sensitivity
+            float mouseX = Input.GetAxis("Mouse X") * lookSensX; //mouse X-axis movement (edit>projSettings>MouseX)
+            float mouseY = Input.GetAxis("Mouse Y") * lookSensY; //mouse Y-axis movements
+
+            //rotate player left and right (no need to rotate camera this way since cam is within player/capsule)
+            transform.Rotate(Vector3.up * mouseX); //multiply Vector3 w/ x-value of 1 by user's x-axis input (Vector3.up = (0,1,0))
+
+            //rotate camera up and down (rotates cam w/o rotating actual player model)
+            verticalLookRotation -= mouseY; //subtract vert cam rotation by user y-axis input
+            verticalLookRotation = Mathf.Clamp(verticalLookRotation, minAngleY, maxAngleY); //clamp vert cam rotation between min and max values
+            Camera.localEulerAngles = new Vector3(verticalLookRotation, 0f, 0f); //rotate camera relative to parent & plug in vertRotation value
         }
 
-        //Jumping (not working yet)
+        //Jumping (6/19: not working yet)
         if (Input.GetButton("Jump") && charController.isGrounded) //if player is grounded & pressing spacebar/X/A, etc.
         {
-            moveDirection.y += jumpSpeed; //apply jump force
+            moveDirection.y += jumpSpeed * Time.deltaTime; //apply jump force
         }else{
-            moveDirection.y += gravity; //apply gravity force whenever player isn't grounded or actively jumping (+= since gravity is negative)
+            moveDirection.y += gravity * Time.deltaTime; //apply gravity force whenever player isn't grounded or actively jumping (+= since gravity is negative)
         }
-
-        //TO-DO: obj pickup
-
-
-        //miguel's code used 4 reference (line 10, 43)
-        //inputDirection = new Vector3(playerMovement.action.ReadValue<Vector2>().x, 0, playerMovement.action.ReadValue<Vector2>().y).normalized;
     }
 }
