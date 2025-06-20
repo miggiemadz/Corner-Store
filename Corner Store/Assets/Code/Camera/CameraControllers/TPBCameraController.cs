@@ -45,7 +45,7 @@ public class TPBCameraController : MonoBehaviour
         float lookMovementX = lookInput.action.ReadValue<Vector2>().x;
         float lookMovementY = lookInput.action.ReadValue<Vector2>().y;
 
-        if (Input.GetMouseButton(1) && cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MouseInput)
+        if (Input.GetMouseButton(1) && cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MnK)
         {
            if (Mathf.Abs(lookMovementX) > 0)
            {
@@ -58,7 +58,7 @@ public class TPBCameraController : MonoBehaviour
            }
         }
             
-        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.ControllerInput)
+        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
         {
            if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
            {

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraSettingsManager : MonoBehaviour
+public class SettingsManager : MonoBehaviour
 {
     [Header("Universal")]
     [SerializeField] private Slider FOVSlider;

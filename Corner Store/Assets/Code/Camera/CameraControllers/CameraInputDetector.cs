@@ -28,12 +28,12 @@ public class CameraInputDetector : MonoBehaviour
 
         if (device is Mouse)
         {
-            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.MouseInput;
+            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.MnK;
         }
 
         if (device is Gamepad)
         {
-            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.ControllerInput;
+            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.Controller;
         }
     }
 }

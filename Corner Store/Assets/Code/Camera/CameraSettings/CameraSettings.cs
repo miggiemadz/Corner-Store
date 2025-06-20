@@ -12,8 +12,8 @@ public class CameraSettings : ScriptableObject
 
     public enum InputDeviceTypes
     {
-        ControllerInput,
-        MouseInput
+        Controller,
+        MnK
     }
 
     public enum ControllerType
@@ -25,8 +25,8 @@ public class CameraSettings : ScriptableObject
     }
 
     [Header("Universal Settings")]
-    private float shoulderSide = .75f; // Component: Camera Side. Values: 1 (right), 0 (Left)
-    private float fOV = 60f; // Component: Lens(Vertical FOV), Values: 60 - 90
+    private float shoulderSide = .75f; 
+    private float fOV = 60f; 
     private CameraPOVs currentPOV;
     private InputDeviceTypes lastInputDeviceType;
     private ControllerType currentControllerType;

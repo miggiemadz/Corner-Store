@@ -14,7 +14,7 @@ public class InputUIManager : MonoBehaviour
 
     void Update()
     {
-        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.ControllerInput)
+        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
         {
             foreach (GameObject icons in MNKInputs)
             {
@@ -27,7 +27,7 @@ public class InputUIManager : MonoBehaviour
             }
         }
 
-        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MouseInput)
+        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MnK)
         {
             foreach (GameObject icons in MNKInputs)
             {
