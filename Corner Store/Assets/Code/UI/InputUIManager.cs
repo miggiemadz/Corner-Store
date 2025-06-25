@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class InputUIManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] MNKInputs;
-    [SerializeField] GameObject[] ControllerInputs;
+    [SerializeField] GameObject[] ControlTypes;
 
     [SerializeField] CameraSettings cameraSettings;
 
@@ -14,30 +13,43 @@ public class InputUIManager : MonoBehaviour
 
     void Update()
     {
-        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
+        switch (cameraSettings.LastInputDeviceType)
         {
-            foreach (GameObject icons in MNKInputs)
-            {
-                icons.SetActive(false);
-            }
+            case CameraSettings.InputDeviceTypes.MnK:
+                foreach (GameObject control in ControlTypes)
+                {
+                    GameObject MnKInput = control.transform.GetChild(0).gameObject;
+                    GameObject controllerInput = control.transform.GetChild(1).gameObject;
 
-            foreach (GameObject icons in ControllerInputs)
-            {
-                icons.SetActive(true);
-            }
-        }
+                    MnKInput.SetActive(true);
+                    controllerInput.SetActive(false);
+                }
+                break;
 
-        if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MnK)
-        {
-            foreach (GameObject icons in MNKInputs)
-            {
-                icons.SetActive(true);
-            }
+            case CameraSettings.InputDeviceTypes.Controller:
+                foreach (GameObject control in ControlTypes)
+                {
+                    GameObject MnKInput = control.transform.GetChild(0).gameObject;
+                    GameObject controllerInput = control.transform.GetChild(1).gameObject;
 
-            foreach (GameObject icons in ControllerInputs)
-            {
-                icons.SetActive(false);
-            }
+                    MnKInput.SetActive(false);
+                    controllerInput.SetActive(true);
+
+                    GameObject[] controllerTypes = { controllerInput.transform.GetChild(0).gameObject, controllerInput.transform.GetChild(1).gameObject, controllerInput.transform.GetChild(2).gameObject, controllerInput.transform.GetChild(3).gameObject };
+
+                    for (int i = 0; i < controllerTypes.Length; i++)
+                    {
+                        if (i == (int)cameraSettings.CurrentControllerType)
+                        {
+                            controllerTypes[i].SetActive(true);
+                        }
+                        else
+                        {
+                            controllerTypes[i].SetActive(false);
+                        }
+                    }
+                }
+                break;
         }
     }
 }
