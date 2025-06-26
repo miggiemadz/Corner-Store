@@ -26,7 +26,8 @@ public class CameraSettings : ScriptableObject
 
     [Header("Universal Settings")]
     private float shoulderSide = .75f; 
-    private float fOV = 60f; 
+    private float fOV = 60f;
+    private bool isSettingsActive;
     private CameraPOVs currentPOV;
     private InputDeviceTypes lastInputDeviceType;
     private ControllerType currentControllerType;
@@ -47,8 +48,7 @@ public class CameraSettings : ScriptableObject
     public CameraPOVs CurrentPOV { get => currentPOV; set => currentPOV = value; }
     public InputDeviceTypes LastInputDeviceType { get => lastInputDeviceType; set => lastInputDeviceType = value; }
     public ControllerType CurrentControllerType { get => currentControllerType; set => currentControllerType = value; }
-
-
+    public bool IsSettingsActive { get => isSettingsActive; set => isSettingsActive = value; }
 
     // MnK
     public float CameraSensitivityXMNK { get => cameraSensitivityXMNK; set => cameraSensitivityXMNK = value; }

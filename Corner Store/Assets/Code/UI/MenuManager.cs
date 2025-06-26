@@ -7,14 +7,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private CameraSettings cameraSettings;
 
     [Header("Inputs")]
-    [SerializeField] private InputActionReference pauseInput;
-    [SerializeField] private GameObject[] controllerButtonUI;
-    [SerializeField] private GameObject[] inputTypes;
-
+    [SerializeField] private InputActionReference pauseInputAction;
 
     [Header ("Menus/UI")]
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject[] listOfMenus;
     [SerializeField] private GameObject buttonInputUI;
+    private GameObject currentActiveMenu;
+
+    public GameObject CurrentActiveMenu { get => currentActiveMenu; set => currentActiveMenu = value; }
 
     void Start()
     {
@@ -23,38 +23,27 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (pauseInput.action.triggered)
-        { 
-            settingsMenu.SetActive(!settingsMenu.activeSelf);
+        if (pauseInputAction.action.triggered)
+        {
+            listOfMenus[0].SetActive(!listOfMenus[0].activeSelf);
             buttonInputUI.SetActive(!buttonInputUI.activeSelf);
         }
 
-        updateControllerInputType();
+        CheckActiveMenu();
     }
 
-    private void updateControllerInputType()
+    private void CheckActiveMenu()
     {
-        for (int i = 0;  i < controllerButtonUI.Length; i++)
+        foreach (GameObject menu in listOfMenus)
         {
-            for(int j = 0; i < controllerButtonUI[i].transform.childCount; j++)
+            if (menu.activeSelf)
             {
-                if (controllerButtonUI[i].name == cameraSettings.LastInputDeviceType.ToString())
-                {
-                    controllerButtonUI[i].SetActive(true);
-                }
-                else
-                {
-                    controllerButtonUI[i].SetActive(false);
-                }
+                CurrentActiveMenu = menu;
             }
-        }
-    }
-
-    private void updateGeneralInputType()
-    {
-        for (int i = 0; i < inputTypes.Length; i++)
-        {
-
+            else
+            {
+                CurrentActiveMenu = null;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ public class TPFCameraController : MonoBehaviour
     [Header("Universal")]
     [SerializeField] private CameraSettings cameraSettings;
     [SerializeField] private InputActionReference lookInput;
+    [SerializeField] private MenuManager menuManager;
 
     [Header("Cinemachine Components")]
     [SerializeField] private CinemachineCamera TPFPlayerCamera;
