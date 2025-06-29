@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TPBCameraController : MonoBehaviour
+public class TPCameraController : MonoBehaviour
 {
     [Header("Universal")]
     [SerializeField] private CameraSettings cameraSettings;
@@ -12,17 +12,14 @@ public class TPBCameraController : MonoBehaviour
     [SerializeField] private MenuManager menuManager;
 
     [Header("Cinemachine Components")]
-    [SerializeField] private CinemachineCamera TPBPlayerCamera;
-    [SerializeField] private CinemachineThirdPersonFollow TPBPlayerCameraTPF;
-    [SerializeField] private CinemachineRotationComposer TPBPlayerCameraRotationComposer;
-    [SerializeField] private CinemachineCameraOffset TPBCameraOffset;
+    [SerializeField] private CinemachineCamera TPPlayerCamera;
+    [SerializeField] private CinemachineThirdPersonFollow TPPlayerCameraTPF;
+    [SerializeField] private CinemachineRotationComposer TPPlayerCameraRotationComposer;
+    [SerializeField] private CinemachineCameraOffset TPCameraOffset;
 
     void Start()
     {
-        TPBPlayerCamera = gameObject.GetComponent<CinemachineCamera>();
-        TPBPlayerCameraTPF = gameObject.GetComponent<CinemachineThirdPersonFollow>();
-        TPBPlayerCameraRotationComposer = gameObject.GetComponent<CinemachineRotationComposer>();
-        TPBCameraOffset = gameObject.GetComponent<CinemachineCameraOffset>();
+        
     }
 
     private void Awake()
@@ -35,10 +32,10 @@ public class TPBCameraController : MonoBehaviour
         CameraMovement();
 
         // Camera Shoudler
-        TPBCameraOffset.Offset.x = cameraSettings.ShoulderSide;
+        TPCameraOffset.Offset.x = cameraSettings.ShoulderSide;
 
         // FOV
-        TPBPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
+        TPPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
     }
 
     private void CameraMovement()
@@ -52,12 +49,12 @@ public class TPBCameraController : MonoBehaviour
             {
                 if (Mathf.Abs(lookMovementX) > 0)
                 {
-                    TPBPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0)
                 {
-                    TPBPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
                 }
             }
 
@@ -65,12 +62,12 @@ public class TPBCameraController : MonoBehaviour
             {
                 if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
                 {
-                    TPBPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight)
                 {
-                    TPBPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
                 }
 
             }
