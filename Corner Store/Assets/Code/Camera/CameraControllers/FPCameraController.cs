@@ -5,25 +5,33 @@ using UnityEngine.InputSystem;
 public class FPCameraController : MonoBehaviour
 {
     [Header("Universal")]
+    [SerializeField] private GameObject player;
     [SerializeField] private CameraSettings cameraSettings;
-    [SerializeField] private InputActionReference cameraInput;
+    [SerializeField] private InputActionReference lookInput;
+    [SerializeField] private MenuManager menuManager;
 
     [Header("Cinemachine Components")]
     [SerializeField] private CinemachineCamera FPPlayerCamera;
-    [SerializeField] private CinemachineThirdPersonFollow FPPlayerCameraTPF;
-    [SerializeField] private CinemachineRotationComposer FPPlayerCameraRotationComposer;
-    [SerializeField] private CinemachineCameraOffset FPCameraOffset;
+    [SerializeField] private CinemachineHardLockToTarget FPHardLockToTarget;
 
     void Start()
     {
-        FPPlayerCamera = gameObject.GetComponent<CinemachineCamera>();
-        FPPlayerCameraTPF = gameObject.GetComponent<CinemachineThirdPersonFollow>();
-        FPPlayerCameraRotationComposer = gameObject.GetComponent<CinemachineRotationComposer>();
-        FPCameraOffset = gameObject.GetComponent<CinemachineCameraOffset>();
+        
     }
 
     void Update()
     {
-        
+        CameraMovement();
+
+        // FOV
+        FPPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
+    }
+
+    private void CameraMovement()
+    {
+        if (menuManager.CurrentActiveMenu == null)
+        {
+            gameObject.transform.forward = player.gameObject.transform.forward;
+        }
     }
 }
