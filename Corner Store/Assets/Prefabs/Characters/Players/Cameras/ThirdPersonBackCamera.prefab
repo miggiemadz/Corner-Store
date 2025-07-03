@@ -96,7 +96,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
-  CameraDistance: 5.09
+  CameraDistance: 5
   AvoidObstacles:
     Enabled: 1
     CollisionFilter:
@@ -164,10 +164,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: {fileID: 11400000, guid: deeb8c68ab48cb44f94c9c0d2e09cbf6, type: 2}
   lookInput: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  TPBPlayerCamera: {fileID: 5163920310961837744}
-  TPBPlayerCameraTPF: {fileID: 8005039242100661145}
-  TPBPlayerCameraRotationComposer: {fileID: 4479009981980793146}
-  TPBCameraOffset: {fileID: 6505042246139781559}
+  menuManager: {fileID: 0}
+  TPPlayerCamera: {fileID: 5163920310961837744}
+  TPPlayerCameraTPF: {fileID: 8005039242100661145}
+  TPPlayerCameraRotationComposer: {fileID: 4479009981980793146}
+  TPCameraOffset: {fileID: 6505042246139781559}
 --- !u!114 &1197624162751501545
 MonoBehaviour:
   m_ObjectHideFlags: 0

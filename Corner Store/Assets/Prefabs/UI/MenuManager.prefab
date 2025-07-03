@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad825b20eb3c3b4cafcfea0a27160f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseInput: {fileID: 1792781691239993457, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  settingsMenu: {fileID: 0}
+  cameraSettings: {fileID: 11400000, guid: deeb8c68ab48cb44f94c9c0d2e09cbf6, type: 2}
+  pauseInputAction: {fileID: 1792781691239993457, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  listOfMenus:
+  - {fileID: 0}
   buttonInputUI: {fileID: 0}
