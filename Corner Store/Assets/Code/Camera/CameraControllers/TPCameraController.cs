@@ -49,12 +49,12 @@ public class TPCameraController : MonoBehaviour
             {
                 if (Mathf.Abs(lookMovementX) > 0)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 10);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 10);
                 }
             }
 
@@ -62,12 +62,12 @@ public class TPCameraController : MonoBehaviour
             {
                 if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.CameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 10);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.CameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 10);
                 }
 
             }

@@ -33,12 +33,17 @@ public class CameraSettings : ScriptableObject
     private ControllerType currentControllerType;
 
     [Header("MnK Settings")]
-    private float cameraSensitivityXMNK = 0.1f;
-    private float cameraSensitivityYMNK = 0.1f;
+    private float tPCameraSensitivityXMNK = 0.1f;
+    private float tPCameraSensitivityYMNK = 0.1f;
+    private float fPCameraSensitivityXMNK = 0.1f;
+    private float fPCameraSensitivityYMNK = 0.1f;
+
 
     [Header("Controller Settings")]
-    private float cameraSensitivityXController = 0.1f;
-    private float cameraSensitivityYController = 0.1f;
+    private float tPCameraSensitivityXController = 0.1f;
+    private float tPCameraSensitivityYController = 0.1f;
+    private float fPCameraSensitivityXController = 0.1f;
+    private float fPCameraSensitivityYController = 0.1f;
     private float controllerDeadZoneLeft = 0.1f;
     private float controllerDeadZoneRight = 0.1f;
 
@@ -51,12 +56,16 @@ public class CameraSettings : ScriptableObject
     public bool IsSettingsActive { get => isSettingsActive; set => isSettingsActive = value; }
 
     // MnK
-    public float CameraSensitivityXMNK { get => cameraSensitivityXMNK; set => cameraSensitivityXMNK = value; }
-    public float CameraSensitivityYMNK { get => cameraSensitivityYMNK; set => cameraSensitivityYMNK = value; }
+    public float TPCameraSensitivityXMNK { get => tPCameraSensitivityXMNK; set => tPCameraSensitivityXMNK = value; }
+    public float TPCameraSensitivityYMNK { get => tPCameraSensitivityYMNK; set => tPCameraSensitivityYMNK = value; }
+    public float FPCameraSensitivityXMNK { get => fPCameraSensitivityXMNK; set => fPCameraSensitivityXMNK = value; }
+    public float FPCameraSensitivityYMNK { get => fPCameraSensitivityYMNK; set => fPCameraSensitivityYMNK = value; }
 
     // Controller
-    public float CameraSensitivityXController { get => cameraSensitivityXController; set => cameraSensitivityXController = value; }
-    public float CameraSensitivityYController { get => cameraSensitivityYController; set => cameraSensitivityYController = value; }
+    public float TPCameraSensitivityXController { get => tPCameraSensitivityXController; set => tPCameraSensitivityXController = value; }
+    public float TPCameraSensitivityYController { get => tPCameraSensitivityYController; set => tPCameraSensitivityYController = value; }
     public float ControllerDeadZoneLeft { get => controllerDeadZoneLeft; set => controllerDeadZoneLeft = value; }
     public float ControllerDeadZoneRight { get => controllerDeadZoneRight; set => controllerDeadZoneRight = value; }
+    public float FPCameraSensitivityXController { get => fPCameraSensitivityXController; set => fPCameraSensitivityXController = value; }
+    public float FPCameraSensitivityYController { get => fPCameraSensitivityYController; set => fPCameraSensitivityYController = value; }
 }

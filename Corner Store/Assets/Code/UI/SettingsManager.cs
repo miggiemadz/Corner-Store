@@ -62,16 +62,16 @@ public class SettingsManager : MonoBehaviour
         FOVValueText.text = cameraSettings.FOV.ToString();
 
         // Mouse & Keyboard
-        cameraSettings.CameraSensitivityXMNK = MNKSensitivityXSlider.value;
-        MNKSensitivityXValueText.text = cameraSettings.CameraSensitivityXMNK.ToString();
-        cameraSettings.CameraSensitivityYMNK = MNKSensitivityYSlider.value;
-        MNKSensitivityYValueText.text = cameraSettings.CameraSensitivityYMNK.ToString();
+        cameraSettings.TPCameraSensitivityXMNK = MNKSensitivityXSlider.value;
+        MNKSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXMNK.ToString();
+        cameraSettings.TPCameraSensitivityYMNK = MNKSensitivityYSlider.value;
+        MNKSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYMNK.ToString();
 
         // Controller
-        cameraSettings.CameraSensitivityXController = controllerSensitivityXSlider.value;
-        controllerSensitivityXValueText.text = cameraSettings.CameraSensitivityXController.ToString();
-        cameraSettings.CameraSensitivityYController = controllerSensitivityYSlider.value;
-        controllerSensitivityYValueText.text = cameraSettings.CameraSensitivityYController.ToString();
+        cameraSettings.TPCameraSensitivityXController = controllerSensitivityXSlider.value;
+        controllerSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXController.ToString();
+        cameraSettings.TPCameraSensitivityYController = controllerSensitivityYSlider.value;
+        controllerSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYController.ToString();
 
         if (universalDeadZoneToggle.isOn)
         {
