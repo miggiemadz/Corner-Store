@@ -49,25 +49,25 @@ public class TPCameraController : MonoBehaviour
             {
                 if (Mathf.Abs(lookMovementX) > 0)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 1000);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 1000);
                 }
             }
 
             if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
             {
-                if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
+                if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 1000);
                 }
 
-                if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight)
+                if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 10);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 1000);
                 }
 
             }

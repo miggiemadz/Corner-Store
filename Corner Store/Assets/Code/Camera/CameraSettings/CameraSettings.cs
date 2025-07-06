@@ -33,19 +33,19 @@ public class CameraSettings : ScriptableObject
     private ControllerType currentControllerType;
 
     [Header("MnK Settings")]
-    private float tPCameraSensitivityXMNK = 0.1f;
-    private float tPCameraSensitivityYMNK = 0.1f;
-    private float fPCameraSensitivityXMNK = 0.1f;
-    private float fPCameraSensitivityYMNK = 0.1f;
+    private float tPCameraSensitivityXMNK = 1f;
+    private float tPCameraSensitivityYMNK = 1f;
+    private float fPCameraSensitivityXMNK = 1f;
+    private float fPCameraSensitivityYMNK = 1f;
 
 
     [Header("Controller Settings")]
-    private float tPCameraSensitivityXController = 0.1f;
-    private float tPCameraSensitivityYController = 0.1f;
-    private float fPCameraSensitivityXController = 0.1f;
-    private float fPCameraSensitivityYController = 0.1f;
-    private float controllerDeadZoneLeft = 0.1f;
-    private float controllerDeadZoneRight = 0.1f;
+    private float tPCameraSensitivityXController = 1f;
+    private float tPCameraSensitivityYController = 1f;
+    private float fPCameraSensitivityXController = 1f;
+    private float fPCameraSensitivityYController = 1f;
+    private float controllerDeadZoneLeft = 1f;
+    private float controllerDeadZoneRight = 1f;
 
     // Universal
     public float ShoulderSide { get => shoulderSide; set => shoulderSide = value; }
