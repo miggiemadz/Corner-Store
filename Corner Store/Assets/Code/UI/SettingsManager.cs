@@ -13,16 +13,24 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Toggle universalDeadZoneToggle;
 
     [Header("Mouse & Keyboard")]
-    [SerializeField] private Slider MNKSensitivityXSlider;
-    [SerializeField] private TextMeshProUGUI MNKSensitivityXValueText;
-    [SerializeField] private Slider MNKSensitivityYSlider;
-    [SerializeField] private TextMeshProUGUI MNKSensitivityYValueText;
+    [SerializeField] private Slider TPMNKSensitivityXSlider;
+    [SerializeField] private TextMeshProUGUI TPMNKSensitivityXValueText;
+    [SerializeField] private Slider TPMNKSensitivityYSlider;
+    [SerializeField] private TextMeshProUGUI TPMNKSensitivityYValueText;
+    [SerializeField] private Slider FPMNKSensitivityXSlider;
+    [SerializeField] private TextMeshProUGUI FPMNKSensitivityXValueText;
+    [SerializeField] private Slider FPMNKSensitivityYSlider;
+    [SerializeField] private TextMeshProUGUI FPMNKSensitivityYValueText;
 
     [Header("Controller")]
-    [SerializeField] private Slider controllerSensitivityXSlider;
-    [SerializeField] private TextMeshProUGUI controllerSensitivityXValueText;
-    [SerializeField] private Slider controllerSensitivityYSlider;
-    [SerializeField] private TextMeshProUGUI controllerSensitivityYValueText;
+    [SerializeField] private Slider TPControllerSensitivityXSlider;
+    [SerializeField] private TextMeshProUGUI TPControllerSensitivityXValueText;
+    [SerializeField] private Slider TPControllerSensitivityYSlider;
+    [SerializeField] private TextMeshProUGUI TPControllerSensitivityYValueText;
+    [SerializeField] private Slider FPControllerSensitivityXSlider;
+    [SerializeField] private TextMeshProUGUI FPControllerSensitivityXValueText;
+    [SerializeField] private Slider FPControllerSensitivityYSlider;
+    [SerializeField] private TextMeshProUGUI FPControllerSensitivityYValueText;
     [SerializeField] private Slider controllerDeadZoneLeftSlider;
     [SerializeField] private TextMeshProUGUI controllerDeadZoneLeftValueText;
     [SerializeField] private Slider controllerDeadZoneRightSlider;
@@ -62,16 +70,24 @@ public class SettingsManager : MonoBehaviour
         FOVValueText.text = cameraSettings.FOV.ToString();
 
         // Mouse & Keyboard
-        cameraSettings.TPCameraSensitivityXMNK = MNKSensitivityXSlider.value;
-        MNKSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXMNK.ToString();
-        cameraSettings.TPCameraSensitivityYMNK = MNKSensitivityYSlider.value;
-        MNKSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYMNK.ToString();
+        cameraSettings.TPCameraSensitivityXMNK = TPMNKSensitivityXSlider.value;
+        TPMNKSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXMNK.ToString();
+        cameraSettings.TPCameraSensitivityYMNK = TPMNKSensitivityYSlider.value;
+        TPMNKSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYMNK.ToString();
+        cameraSettings.FPCameraSensitivityXMNK = FPMNKSensitivityXSlider.value;
+        FPMNKSensitivityXValueText.text = cameraSettings.FPCameraSensitivityXMNK.ToString();
+        cameraSettings.FPCameraSensitivityYMNK = FPMNKSensitivityYSlider.value;
+        FPMNKSensitivityYValueText.text = cameraSettings.FPCameraSensitivityYMNK.ToString();
 
         // Controller
-        cameraSettings.TPCameraSensitivityXController = controllerSensitivityXSlider.value;
-        controllerSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXController.ToString();
-        cameraSettings.TPCameraSensitivityYController = controllerSensitivityYSlider.value;
-        controllerSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYController.ToString();
+        cameraSettings.TPCameraSensitivityXController = TPControllerSensitivityXSlider.value;
+        TPControllerSensitivityXValueText.text = cameraSettings.TPCameraSensitivityXController.ToString();
+        cameraSettings.TPCameraSensitivityYController = TPControllerSensitivityYSlider.value;
+        TPControllerSensitivityYValueText.text = cameraSettings.TPCameraSensitivityYController.ToString();
+        cameraSettings.FPCameraSensitivityXController = FPControllerSensitivityXSlider.value;
+        FPControllerSensitivityXValueText.text = cameraSettings.FPCameraSensitivityXController.ToString();
+        cameraSettings.FPCameraSensitivityYController = FPControllerSensitivityYSlider.value;
+        FPControllerSensitivityYValueText.text = cameraSettings.FPCameraSensitivityYController.ToString();
 
         if (universalDeadZoneToggle.isOn)
         {

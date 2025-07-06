@@ -12,8 +12,8 @@ public class CameraSettings : ScriptableObject
 
     public enum InputDeviceTypes
     {
-        Controller,
-        MnK
+        MnK,
+        Controller
     }
 
     public enum ControllerType

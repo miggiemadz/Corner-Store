@@ -12,6 +12,7 @@ public class CameraToggleManager : MonoBehaviour
     [Header("Settings/UI")]
     [SerializeField] CameraSettings cameraSettings;
     [SerializeField] InputActionReference toggleCameraInput;
+    [SerializeField] MenuManager menuManager;
     private int currentPOV = 0;
 
     void Start()
@@ -35,17 +36,27 @@ public class CameraToggleManager : MonoBehaviour
        switch (cameraSettings.CurrentPOV)
        {
            case CameraSettings.CameraPOVs.FirstPerson:
+               if (menuManager.CurrentActiveMenu == null)
+               {
+                   Cursor.visible = false;
+               }
+               else
+               {
+                   Cursor.visible = true;
+               }
                firstPersonCamera.gameObject.SetActive(true);
                thirdPersonCamera.gameObject.SetActive(false);
                break;
 
            case CameraSettings.CameraPOVs.ThirdPersonFront:
+               Cursor.visible = true;
                firstPersonCamera.gameObject.SetActive(false);
                thirdPersonCamera.gameObject.SetActive(true);
                thirdPersonCameraPivot.transform.eulerAngles = new Vector3(0, 180, 0);
                break;
 
            case CameraSettings.CameraPOVs.ThirdPersonBehind:
+               Cursor.visible = true;
                firstPersonCamera.gameObject.SetActive(false);
                thirdPersonCamera.gameObject.SetActive(true);
                thirdPersonCameraPivot.transform.eulerAngles = new Vector3(0, 0, 0);
