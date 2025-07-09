@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraInputDetector : MonoBehaviour
 {
     [SerializeField] private CameraSettings cameraSettings;
+    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private InputActionReference lookInput;
 
     private void OnEnable()
@@ -28,12 +29,12 @@ public class CameraInputDetector : MonoBehaviour
 
         if (device is Mouse)
         {
-            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.MnK;
+            gameSettings.LastInputDeviceType = GameSettings.InputDeviceTypes.MnK;
         }
 
         if (device is Gamepad)
         {
-            cameraSettings.LastInputDeviceType = CameraSettings.InputDeviceTypes.Controller;
+            gameSettings.LastInputDeviceType = GameSettings.InputDeviceTypes.Controller;
         }
     }
 }

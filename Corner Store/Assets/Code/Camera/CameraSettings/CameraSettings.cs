@@ -10,27 +10,10 @@ public class CameraSettings : ScriptableObject
         ThirdPersonFront
     }
 
-    public enum InputDeviceTypes
-    {
-        MnK,
-        Controller
-    }
-
-    public enum ControllerType
-    {
-        PS4,
-        PS5,
-        XBox,
-        Switch
-    }
-
     [Header("Universal Settings")]
     private float shoulderSide = .75f; 
     private float fOV = 60f;
-    private bool isSettingsActive;
     private CameraPOVs currentPOV;
-    private InputDeviceTypes lastInputDeviceType;
-    private ControllerType currentControllerType;
 
     [Header("MnK Settings")]
     private float tPCameraSensitivityXMNK = 1f;
@@ -51,9 +34,6 @@ public class CameraSettings : ScriptableObject
     public float ShoulderSide { get => shoulderSide; set => shoulderSide = value; }
     public float FOV { get => fOV; set => fOV = value; }
     public CameraPOVs CurrentPOV { get => currentPOV; set => currentPOV = value; }
-    public InputDeviceTypes LastInputDeviceType { get => lastInputDeviceType; set => lastInputDeviceType = value; }
-    public ControllerType CurrentControllerType { get => currentControllerType; set => currentControllerType = value; }
-    public bool IsSettingsActive { get => isSettingsActive; set => isSettingsActive = value; }
 
     // MnK
     public float TPCameraSensitivityXMNK { get => tPCameraSensitivityXMNK; set => tPCameraSensitivityXMNK = value; }

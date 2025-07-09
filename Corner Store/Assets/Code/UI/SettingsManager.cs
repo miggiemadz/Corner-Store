@@ -9,6 +9,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider FOVSlider;
     [SerializeField] private TextMeshProUGUI FOVValueText;
     [SerializeField] private CameraSettings cameraSettings;
+    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private Toggle shoulderCameraToggle;
     [SerializeField] private Toggle universalDeadZoneToggle;
 
@@ -141,16 +142,16 @@ public class SettingsManager : MonoBehaviour
         switch (currentActive)
         {
             case 0:
-                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.PS4;
+                gameSettings.CurrentControllerType = GameSettings.ControllerType.PS4;
                 break;
             case 1:
-                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.PS5;
+                gameSettings.CurrentControllerType = GameSettings.ControllerType.PS5;
                 break;
             case 2: 
-                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.XBox;
+                gameSettings.CurrentControllerType = GameSettings.ControllerType.XBox;
                 break;
             case 3:
-                cameraSettings.CurrentControllerType = CameraSettings.ControllerType.Switch;
+                gameSettings.CurrentControllerType = GameSettings.ControllerType.Switch;
                 break;
         }
 

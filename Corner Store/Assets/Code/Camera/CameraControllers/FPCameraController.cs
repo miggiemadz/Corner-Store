@@ -8,6 +8,7 @@ public class FPCameraController : MonoBehaviour
     [Header("Universal")]
     [SerializeField] private GameObject playerEyes;
     [SerializeField] private CameraSettings cameraSettings;
+    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private InputActionReference lookInput;
     [SerializeField] private MenuManager menuManager;
 
@@ -30,6 +31,8 @@ public class FPCameraController : MonoBehaviour
     {
         CameraMovement();
 
+        Debug.Log(gameSettings.LastInputDeviceType);
+
         // FOV
         FPPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
         gameObject.transform.forward = playerEyes.transform.forward;
@@ -42,7 +45,7 @@ public class FPCameraController : MonoBehaviour
 
         if (menuManager.CurrentActiveMenu == null)
         {
-            if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MnK)
+            if (gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.MnK)
             {
                 if (Mathf.Abs(lookMovementY) > 0)
                 {
@@ -55,19 +58,20 @@ public class FPCameraController : MonoBehaviour
                 }
             }
 
-            if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
+            if (gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.Controller)
             {
-                if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight)
+                if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    lookYaw += Mathf.Sign(lookMovementX) * cameraSettings.FPCameraSensitivityXMNK / 10;
+                    lookYaw += Mathf.Sign(lookMovementX) * cameraSettings.FPCameraSensitivityXController / 10;
                 }
 
-                if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight)
+                if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    lookPitch -= Mathf.Sign(lookMovementY) * cameraSettings.FPCameraSensitivityYMNK / 10;
+                    lookPitch -= Mathf.Sign(lookMovementY) * cameraSettings.FPCameraSensitivityYController / 10;
                 }
             }
         }
+
         lookRotation = Quaternion.Euler(lookPitch, lookYaw, 0);
 
         playerEyes.transform.rotation = Quaternion.RotateTowards(playerEyes.transform.rotation, lookRotation, 200 * Time.deltaTime);

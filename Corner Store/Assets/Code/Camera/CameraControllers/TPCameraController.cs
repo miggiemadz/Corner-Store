@@ -8,6 +8,7 @@ public class TPCameraController : MonoBehaviour
 {
     [Header("Universal")]
     [SerializeField] private CameraSettings cameraSettings;
+    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private InputActionReference lookInput;
     [SerializeField] private MenuManager menuManager;
 
@@ -45,7 +46,7 @@ public class TPCameraController : MonoBehaviour
 
         if (menuManager.CurrentActiveMenu == null) 
         {
-            if (Input.GetMouseButton(1) && cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.MnK)
+            if (Input.GetMouseButton(1) && gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.MnK)
             {
                 if (Mathf.Abs(lookMovementX) > 0)
                 {
@@ -58,16 +59,16 @@ public class TPCameraController : MonoBehaviour
                 }
             }
 
-            if (cameraSettings.LastInputDeviceType == CameraSettings.InputDeviceTypes.Controller)
+            if (gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.Controller)
             {
                 if (Mathf.Abs(lookMovementX) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXMNK / 1000);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.x -= (Mathf.Sign(lookMovementX) * cameraSettings.TPCameraSensitivityXController / 1000);
                 }
 
                 if (Mathf.Abs(lookMovementY) > 0 + cameraSettings.ControllerDeadZoneRight / 10)
                 {
-                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYMNK / 1000);
+                    TPPlayerCameraRotationComposer.Composition.ScreenPosition.y += (Mathf.Sign(lookMovementY) * cameraSettings.TPCameraSensitivityYController / 1000);
                 }
 
             }
