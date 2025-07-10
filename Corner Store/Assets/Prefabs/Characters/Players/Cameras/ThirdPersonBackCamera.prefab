@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6678429219851107520
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSettings: {fileID: 11400000, guid: deeb8c68ab48cb44f94c9c0d2e09cbf6, type: 2}
+  gameSettings: {fileID: 11400000, guid: 7b62c9a03386df0429ad41842266f290, type: 2}
   lookInput: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   menuManager: {fileID: 0}
   TPPlayerCamera: {fileID: 5163920310961837744}
@@ -182,4 +183,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSettings: {fileID: 11400000, guid: deeb8c68ab48cb44f94c9c0d2e09cbf6, type: 2}
+  gameSettings: {fileID: 11400000, guid: 7b62c9a03386df0429ad41842266f290, type: 2}
   lookInput: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}

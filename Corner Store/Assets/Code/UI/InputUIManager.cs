@@ -5,6 +5,7 @@ public class InputUIManager : MonoBehaviour
     [SerializeField] GameObject[] ControlTypes;
 
     [SerializeField] CameraSettings cameraSettings;
+    [SerializeField] GameSettings gameSettings;
 
     void Start()
     {
@@ -13,9 +14,9 @@ public class InputUIManager : MonoBehaviour
 
     void Update()
     {
-        switch (cameraSettings.LastInputDeviceType)
+        switch (gameSettings.LastInputDeviceType)
         {
-            case CameraSettings.InputDeviceTypes.MnK:
+            case GameSettings.InputDeviceTypes.MnK:
                 foreach (GameObject control in ControlTypes)
                 {
                     GameObject MnKInput = control.transform.GetChild(0).gameObject;
@@ -26,7 +27,7 @@ public class InputUIManager : MonoBehaviour
                 }
                 break;
 
-            case CameraSettings.InputDeviceTypes.Controller:
+            case GameSettings.InputDeviceTypes.Controller:
                 foreach (GameObject control in ControlTypes)
                 {
                     GameObject MnKInput = control.transform.GetChild(0).gameObject;
@@ -39,7 +40,7 @@ public class InputUIManager : MonoBehaviour
 
                     for (int i = 0; i < controllerTypes.Length; i++)
                     {
-                        if (i == (int)cameraSettings.CurrentControllerType)
+                        if (i == (int) gameSettings.CurrentControllerType)
                         {
                             controllerTypes[i].SetActive(true);
                         }
