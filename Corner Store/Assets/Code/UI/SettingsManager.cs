@@ -154,7 +154,5 @@ public class SettingsManager : MonoBehaviour
                 gameSettings.CurrentControllerType = GameSettings.ControllerType.Switch;
                 break;
         }
-
-        Debug.Log(currentActive);
     }
 }

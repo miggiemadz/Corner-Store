@@ -3,11 +3,23 @@ using static System.Net.WebRequestMethods;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private MenuManager menuManager;
+
     private string discordURL = "https://discord.gg/hYzz9EUrPc";
     private string instagramURL = "https://www.instagram.com/studioinfiniteloom/";
     private string tikTokURL = "https://www.tiktok.com/@studio_infinite_loom";
     private string xURL = "https://x.com/StudioInf_Loom";
     private string youTubeURL = "https://www.youtube.com/@StudioInfiniteLoom-yt";
+
+    public void PlayGame()
+    {
+        Debug.Log("Playing game.");
+    }
+
+    public void OpenSettings()
+    {
+        menuManager.SettingsMenu.SetActive(true);
+    }
 
     public void QuitGame()
     {

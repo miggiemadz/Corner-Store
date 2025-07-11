@@ -9,41 +9,57 @@ public class MenuManager : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] private InputActionReference pauseInputAction;
 
-    [Header ("Menus/UI")]
-    [SerializeField] private GameObject[] listOfMenus;
+    [Header("Menus/UI")]
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject[] menuList;
     [SerializeField] private GameObject buttonInputUI;
     private GameObject currentActiveMenu;
 
     public GameObject CurrentActiveMenu { get => currentActiveMenu; set => currentActiveMenu = value; }
+    public GameObject SettingsMenu { get => settingsMenu; set => settingsMenu = value; }
 
     void Start()
     {
-
+        menuList = new GameObject[3];
+        menuList [0] = mainMenu;
+        menuList [1] = pauseMenu;
+        menuList [2] = SettingsMenu;
     }
 
     void Update()
     {
-        if (pauseInputAction.action.triggered)
+        CheckActiveMenu();
+
+        if (currentActiveMenu != null)
         {
-            listOfMenus[0].SetActive(!listOfMenus[0].activeSelf);
-            buttonInputUI.SetActive(!buttonInputUI.activeSelf);
+            buttonInputUI.SetActive(false);
         }
 
-        CheckActiveMenu();
+        if (pauseInputAction.action.triggered)
+        {
+            
+        }
     }
 
     private void CheckActiveMenu()
     {
-        foreach (GameObject menu in listOfMenus)
+        bool hasActiveScene = false;
+
+        foreach (var menu in menuList)
         {
             if (menu.activeSelf)
             {
-                CurrentActiveMenu = menu;
+                currentActiveMenu = menu;
+                hasActiveScene = true;
+                break;
             }
-            else
-            {
-                CurrentActiveMenu = null;
-            }
+        }
+
+        if (!hasActiveScene)
+        {
+            currentActiveMenu = null;
         }
     }
 }
