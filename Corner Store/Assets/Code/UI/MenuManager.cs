@@ -16,30 +16,36 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] menuList;
     [SerializeField] private GameObject buttonInputUI;
     private GameObject currentActiveMenu;
+    private bool buttonInputUIIsOn;
 
     public GameObject CurrentActiveMenu { get => currentActiveMenu; set => currentActiveMenu = value; }
     public GameObject SettingsMenu { get => settingsMenu; set => settingsMenu = value; }
+    public GameObject ButtonInputUI { get => buttonInputUI; set => buttonInputUI = value; }
+    public bool ButtonInputUIIsOn { get => buttonInputUIIsOn; set => buttonInputUIIsOn = value; }
 
     void Start()
     {
         menuList = new GameObject[3];
         menuList [0] = mainMenu;
         menuList [1] = pauseMenu;
-        menuList [2] = SettingsMenu;
     }
 
     void Update()
     {
         CheckActiveMenu();
 
-        if (currentActiveMenu != null)
-        {
-            buttonInputUI.SetActive(false);
-        }
+        ButtonInputUI.SetActive(currentActiveMenu == null && buttonInputUIIsOn);
 
         if (pauseInputAction.action.triggered)
         {
-            
+            if (settingsMenu.activeSelf)
+            {
+                settingsMenu.SetActive(false);
+            }
+            else if (pauseMenu.activeSelf)
+            {
+                pauseMenu.SetActive(false);
+            }
         }
     }
 

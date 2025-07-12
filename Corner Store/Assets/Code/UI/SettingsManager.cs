@@ -10,8 +10,10 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI FOVValueText;
     [SerializeField] private CameraSettings cameraSettings;
     [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private MenuManager menuManager;
     [SerializeField] private Toggle shoulderCameraToggle;
     [SerializeField] private Toggle universalDeadZoneToggle;
+    [SerializeField] private Toggle buttonInputTutorialToggle;
 
     [Header("Mouse & Keyboard")]
     [SerializeField] private Slider TPMNKSensitivityXSlider;
@@ -65,6 +67,8 @@ public class SettingsManager : MonoBehaviour
         {
             cameraSettings.ShoulderSide = -.75f;
         }
+
+        menuManager.ButtonInputUIIsOn = buttonInputTutorialToggle.isOn;
 
         // Universal
         cameraSettings.FOV = FOVSlider.value;
