@@ -1,25 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraInputDetector : MonoBehaviour
+public class GameInputDetector : MonoBehaviour
 {
     [SerializeField] private CameraSettings cameraSettings;
     [SerializeField] private GameSettings gameSettings;
-    [SerializeField] private InputActionReference lookInput;
+    [SerializeField] private InputActionReference inputDetector;
 
     private void OnEnable()
     {
-        if (lookInput != null && lookInput.action != null) 
+        if (inputDetector != null && inputDetector.action != null) 
         {
-            lookInput.action.performed += OnLookPerformed;
+            inputDetector.action.performed += OnLookPerformed;
         }
     }
 
     private void OnDisable()
     {
-        if (lookInput != null && lookInput.action != null)
+        if (inputDetector != null && inputDetector.action != null)
         {
-            lookInput.action.performed -= OnLookPerformed;
+            inputDetector.action.performed -= OnLookPerformed;
         }
     }
 
