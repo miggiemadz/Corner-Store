@@ -1,6 +1,9 @@
 using System.IO.IsolatedStorage;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
@@ -43,19 +46,37 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private GameObject[] controllerInputTypes;
     [SerializeField] private Button controllerInputSwitchButton;
 
+    [Header("Support")]
+    [SerializeField] private GameObject[] itemsList;
+    [SerializeField] private InputActionReference UINavigateInput;
+    [SerializeField] private InputActionReference UISelectInput;
+    [SerializeField] private InputActionReference UIScrollInput;
+    [SerializeField] private Scrollbar scrollBar;
+    private int buttonPointer;
+    private bool navButtonPressed;
+
+    public Toggle ButtonInputTutorialToggle { get => buttonInputTutorialToggle; set => buttonInputTutorialToggle = value; }
+
     void Start()
     {
         shoulderCameraToggle = GameObject.Find("CameraShoulderToggle").GetComponent<Toggle>();
         FOVSlider = GameObject.Find("FOVSlider").GetComponent<Slider>();
         FOVValueText = GameObject.Find("FOVValueText").GetComponent<TextMeshProUGUI>();
+
+        buttonPointer = -1;
+        navButtonPressed = false;
     }
     private void Awake()
     {
-        controllerInputSwitchButton.onClick.AddListener(OnButtonClicked);
+        controllerInputSwitchButton.onClick.AddListener(OnControllerInputButtonClicked);
     }
 
     void Update()
     {
+        ControllerNavigation();
+        HighlightButtons();
+        SelectButtons();
+
         if (controllerInputSwitchButton)
 
         // Camera Shoulder Toggle
@@ -68,11 +89,10 @@ public class SettingsManager : MonoBehaviour
             cameraSettings.ShoulderSide = -.75f;
         }
 
-        menuManager.ButtonInputUIIsOn = buttonInputTutorialToggle.isOn;
-
         // Universal
         cameraSettings.FOV = FOVSlider.value;
         FOVValueText.text = cameraSettings.FOV.ToString();
+        gameSettings.IsButtonInputUIActive = buttonInputTutorialToggle.isOn;
 
         // Mouse & Keyboard
         cameraSettings.TPCameraSensitivityXMNK = TPMNKSensitivityXSlider.value;
@@ -116,10 +136,8 @@ public class SettingsManager : MonoBehaviour
         }
     }
     
-    public void OnButtonClicked()
+    public void OnControllerInputButtonClicked()
     {
-        Debug.Log("Clicked");
-
         int currentActive = 0;
 
         for (int i = 0; i < controllerInputTypes.Length; i++)
@@ -158,5 +176,109 @@ public class SettingsManager : MonoBehaviour
                 gameSettings.CurrentControllerType = GameSettings.ControllerType.Switch;
                 break;
         }
+    }
+
+    private void ControllerNavigation()
+    {
+        Vector2 dPadValue = UINavigateInput.action.ReadValue<Vector2>();
+        Vector2 scrollValue = UIScrollInput.action.ReadValue<Vector2>();
+
+        if (dPadValue == Vector2.zero && navButtonPressed)
+        {
+            navButtonPressed = false;
+        }
+
+        if (gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.Controller && !navButtonPressed)
+        {
+            if ((dPadValue.y > 0.5f || dPadValue.y < -0.5f) && buttonPointer == -1)
+            {
+                buttonPointer = 0;
+                navButtonPressed = true;
+            }
+
+            else if (dPadValue.y < -0.5f)
+            {
+                if (buttonPointer == itemsList.Length - 1)
+                {
+                    buttonPointer = 0;
+                }
+
+                else if (buttonPointer == 11 && !universalDeadZoneToggle.isOn)
+                {
+                    buttonPointer += 2;
+                }
+
+                else if (buttonPointer == 12)
+                {
+                    buttonPointer += 3;
+                }
+
+                else
+                {
+                    buttonPointer++;
+                }
+                navButtonPressed = true;
+            }
+
+            else if (dPadValue.y > 0.5f)
+            {
+                if (buttonPointer == 0)
+                {
+                    buttonPointer = itemsList.Length - 1;
+                }
+
+                else if (buttonPointer == 13 && !universalDeadZoneToggle.isOn)
+                {
+                    buttonPointer -= 2;
+                }
+
+                else if (buttonPointer == 15 && universalDeadZoneToggle.isOn)
+                {
+                    buttonPointer -= 3;
+                }
+
+                else
+                {
+                    buttonPointer--;
+                }
+                navButtonPressed = true;
+            }
+
+            if (scrollValue.y < 0 && scrollBar.value > 0)
+            {
+                scrollBar.value -= .002f;
+            }
+
+            if (scrollValue.y > 0 && scrollBar.value < 1)
+            {
+                scrollBar.value += .002f;
+            }
+            
+        }
+    }
+
+    private void HighlightButtons()
+    {
+        if (buttonPointer > -1)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+
+            EventSystem.current.SetSelectedGameObject(itemsList[buttonPointer]);
+
+            if (buttonPointer == 15)
+            {
+                itemsList[buttonPointer].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+            }
+
+            if (buttonPointer != 15)
+            {
+                itemsList[15].GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            }
+        }
+    }
+
+    private void SelectButtons()
+    {
+        
     }
 }

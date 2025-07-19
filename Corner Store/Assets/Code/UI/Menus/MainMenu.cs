@@ -1,6 +1,10 @@
+using Autodesk.Fbx;
+using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Composites;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static System.Net.WebRequestMethods;
 
@@ -10,12 +14,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private MenuManager menuManager;
     [SerializeField] private InputActionReference UINavigateInput;
-    [SerializeField] private InputActionReference UISelectInput;
 
     [Header("Buttons")]
-    [SerializeField] private Button playButton;
-    [SerializeField] private Button settingsButton;
-    [SerializeField] private Button quitButton;
+    [SerializeField] private Button[] buttonList;
     private int buttonPointer;
     private bool navButtonPressed;
 
@@ -33,9 +34,25 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
+        UpdateSelectedButtonColor();
+
         ControllerNavigation();
         HighlightButtons();
-        SelectButtons();
+
+        if (gameSettings.LastInputDeviceType == GameSettings.InputDeviceTypes.MnK)
+        {
+            buttonPointer = -1;
+        }
+    }
+
+    private void UpdateSelectedButtonColor()
+    {
+        foreach (Button button in buttonList)
+        {
+            ColorBlock colors = button.colors;
+            colors.selectedColor = menuManager.SelectedButtonColor;
+            button.colors = colors;
+        }
     }
 
     private void ControllerNavigation()
@@ -97,61 +114,44 @@ public class MainMenu : MonoBehaviour
     {
         switch (buttonPointer)
         {
+            case -1:
+                EventSystem.current.SetSelectedGameObject(null);
+                break;
+
             case 0:
                 EventSystem.current.SetSelectedGameObject(null);
 
-                EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(buttonList[0].gameObject);
                 break;
 
             case 1:
                 EventSystem.current.SetSelectedGameObject(null);
 
-                EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(buttonList[1].gameObject);
                 break;
 
             case 2:
                 EventSystem.current.SetSelectedGameObject(null);
 
-                EventSystem.current.SetSelectedGameObject(quitButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(buttonList[2].gameObject);
                 break;
         }
     }
 
     public void PlayGame()
     {
-        Debug.Log("Playing game.");
+        SceneManager.LoadScene("CameraTest");
     }
 
     public void OpenSettings()
     {
-        menuManager.SettingsMenu.SetActive(true);
+        menuManager.MenuList[1].SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game");
         Application.Quit();
-    }
-
-    private void SelectButtons()
-    {
-        if (UISelectInput)
-        {
-            switch (buttonPointer)
-            {
-                case 0:
-                    PlayGame();
-                    break;
-
-                case 1:
-                    OpenSettings();
-                    break;
-
-                case 2:
-                    QuitGame();
-                    break;
-            }
-        }
     }
 
     public void OpenURL(string url)

@@ -31,8 +31,6 @@ public class FPCameraController : MonoBehaviour
     {
         CameraMovement();
 
-        Debug.Log(gameSettings.LastInputDeviceType);
-
         // FOV
         FPPlayerCamera.Lens.FieldOfView = cameraSettings.FOV;
         gameObject.transform.forward = playerEyes.transform.forward;

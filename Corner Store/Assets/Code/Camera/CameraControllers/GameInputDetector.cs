@@ -27,7 +27,7 @@ public class GameInputDetector : MonoBehaviour
     {
         var device = context.control.device;
 
-        if (device is Mouse)
+        if (device is Mouse || device is Keyboard)
         {
             gameSettings.LastInputDeviceType = GameSettings.InputDeviceTypes.MnK;
         }

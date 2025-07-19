@@ -22,7 +22,7 @@ public class CameraToggleManager : MonoBehaviour
 
     void Update()
     {
-        if (toggleCameraInput.action.triggered)
+        if (toggleCameraInput.action.triggered && Time.timeScale != 0)
         {
             currentPOV++;
             if (currentPOV > 2)

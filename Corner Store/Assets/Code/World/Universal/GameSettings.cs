@@ -20,8 +20,10 @@ public class GameSettings : ScriptableObject
     private InputDeviceTypes lastInputDeviceType;
     private ControllerType currentControllerType;
     private bool isSettingsActive;
+    private bool isButtonInputUIActive = true;
 
     public InputDeviceTypes LastInputDeviceType { get => lastInputDeviceType; set => lastInputDeviceType = value; }
     public ControllerType CurrentControllerType { get => currentControllerType; set => currentControllerType = value; }
     public bool IsSettingsActive { get => isSettingsActive; set => isSettingsActive = value; }
+    public bool IsButtonInputUIActive { get => isButtonInputUIActive; set => isButtonInputUIActive = value; }
 }

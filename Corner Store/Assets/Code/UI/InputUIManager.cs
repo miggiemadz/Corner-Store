@@ -2,14 +2,41 @@ using UnityEngine;
 
 public class InputUIManager : MonoBehaviour
 {
+    [Header("Controls")]
     [SerializeField] GameObject[] ControlTypes;
 
+    [Header("Universal")]
     [SerializeField] CameraSettings cameraSettings;
     [SerializeField] GameSettings gameSettings;
 
+    [Header("Menus")]
+    [SerializeField] SettingsManager settingsManager;
+    [SerializeField] MenuManager menuManager;
+
     void Start()
     {
-        
+        foreach (GameObject control in ControlTypes)
+        {
+            GameObject MnKInput = control.transform.GetChild(0).gameObject;
+            GameObject controllerInput = control.transform.GetChild(1).gameObject;
+
+            MnKInput.SetActive(false);
+            controllerInput.SetActive(true);
+
+            GameObject[] controllerTypes = { controllerInput.transform.GetChild(0).gameObject, controllerInput.transform.GetChild(1).gameObject, controllerInput.transform.GetChild(2).gameObject, controllerInput.transform.GetChild(3).gameObject };
+
+            for (int i = 0; i < controllerTypes.Length; i++)
+            {
+                if (i == (int)gameSettings.CurrentControllerType)
+                {
+                    controllerTypes[i].SetActive(true);
+                }
+                else
+                {
+                    controllerTypes[i].SetActive(false);
+                }
+            }
+        }
     }
 
     void Update()
