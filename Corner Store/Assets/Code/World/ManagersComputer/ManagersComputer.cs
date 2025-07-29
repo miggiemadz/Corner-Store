@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class ManagersComputer : MonoBehaviour
 {
+    [Header("Screens")]
+    [SerializeField] private GameObject[] mainScreens;
+
+    [Header("Universal")]
     [SerializeField] private MCManager manager;
 
     void Start()
@@ -13,6 +17,19 @@ public class ManagersComputer : MonoBehaviour
     private void OnEnable()
     {
         manager.CurrentScreen = MCManager.Screen.mainLock;
+
+        foreach (var s in mainScreens)
+        {
+            if (mainScreens[0].Equals(s))
+            {
+                s.SetActive(true);
+            }
+
+            else
+            {
+                s.SetActive(false);
+            }
+        }
     }
 
     void Update()

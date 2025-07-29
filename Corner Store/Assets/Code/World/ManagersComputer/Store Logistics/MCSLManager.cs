@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MCSSManager : MonoBehaviour
+public class MCSLManager : MonoBehaviour
 {
     [Header("Screens")]
     [SerializeField] GameObject[] SSScreens;
@@ -15,7 +15,7 @@ public class MCSSManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MCManager.CurrentScreen = MCManager.Screen.SSfrontPage;
+        MCManager.CurrentScreen = MCManager.Screen.SLfrontPage;
 
         foreach (var s in SSScreens)
         {

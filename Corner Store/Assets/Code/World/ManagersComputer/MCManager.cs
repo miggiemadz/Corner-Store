@@ -15,6 +15,7 @@ public class MCManager : ScriptableObject
         SSorderHistory,
         SShelp,
         SScart,
+        SLfrontPage,
         SLenergy,
         SLfinances,
         SLreviews
