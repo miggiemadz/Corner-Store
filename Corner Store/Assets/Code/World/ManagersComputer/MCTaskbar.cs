@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MCTaskbar : MonoBehaviour
 {
+    [SerializeField] private MCManager manager;
+    [SerializeField] private GameObject logoMenu;
+
     void Start()
     {
         
@@ -9,6 +12,16 @@ public class MCTaskbar : MonoBehaviour
 
     void Update()
     {
-        
+       
+    }
+
+    public void LYMELogoButton()
+    {
+        logoMenu.SetActive(!logoMenu.activeSelf);
+    }
+
+    public void PowerButton()
+    {
+        Debug.Log("Power Off");
     }
 }

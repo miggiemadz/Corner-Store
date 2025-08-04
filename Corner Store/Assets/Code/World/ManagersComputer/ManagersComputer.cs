@@ -4,6 +4,7 @@ public class ManagersComputer : MonoBehaviour
 {
     [Header("Screens")]
     [SerializeField] private GameObject[] mainScreens;
+    [SerializeField] private GameObject taskBar;
 
     [Header("Universal")]
     [SerializeField] private MCManager manager;
@@ -36,6 +37,8 @@ public class ManagersComputer : MonoBehaviour
     {
         VirusSpawner();
         DiscountCodeSpawner();
+
+        taskBar.SetActive(manager.CurrentScreen != MCManager.Screen.mainLock);
     }
 
     private void OnApplicationQuit()
