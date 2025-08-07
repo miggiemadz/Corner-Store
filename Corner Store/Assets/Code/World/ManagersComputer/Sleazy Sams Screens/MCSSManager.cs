@@ -7,6 +7,7 @@ public class MCSSManager : MonoBehaviour
 
     [Header("Universal")]
     [SerializeField] MCManager MCManager;
+    [SerializeField] GameObject taskbar;
 
     void Start()
     {
@@ -34,5 +35,24 @@ public class MCSSManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void XButton()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void WindowedButton()
+    {
+
+    }
+
+    public void FullscreenButton()
+    {
+
+    }
+
+    public void MinimizeButton()
+    {
+
     }
 }
