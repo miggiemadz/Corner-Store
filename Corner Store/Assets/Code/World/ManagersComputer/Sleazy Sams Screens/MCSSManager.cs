@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MCSSManager : MonoBehaviour
 {
@@ -7,7 +8,9 @@ public class MCSSManager : MonoBehaviour
 
     [Header("Universal")]
     [SerializeField] MCManager MCManager;
-    [SerializeField] GameObject taskbar;
+    [SerializeField] MCTaskbar taskbar;
+
+    private bool firstTimeOpen = true;
 
     void Start()
     {
@@ -16,20 +19,25 @@ public class MCSSManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MCManager.CurrentScreen = MCManager.Screen.SSfrontPage;
-
-        foreach (var s in SSScreens)
+        if (firstTimeOpen)
         {
-            if (SSScreens[0].Equals(s))
+            foreach (var s in SSScreens)
             {
-                s.SetActive(true);
+                if (SSScreens[0].Equals(s))
+                {
+                    s.SetActive(true);
+                }
+
+                else
+                {
+                    s.SetActive(false);
+                }
             }
 
-            else
-            {
-                s.SetActive(false);
-            }
+            MCManager.CurrentScreen = MCManager.Screen.SSfrontPage;
+            firstTimeOpen = false;
         }
+
     }
 
     void Update()
@@ -38,6 +46,7 @@ public class MCSSManager : MonoBehaviour
     }
     public void XButton()
     {
+        firstTimeOpen = true;
         gameObject.SetActive(false);
     }
 
@@ -53,6 +62,17 @@ public class MCSSManager : MonoBehaviour
 
     public void MinimizeButton()
     {
+        foreach (GameObject tab in taskbar.MinimizedTabs)
+        {
+            if (!tab.activeSelf)
+            {
+                RawImage tabIcon = tab.GetComponent<RawImage>();
+                tabIcon.texture = taskbar.Samslogo;
+                tab.SetActive(true);
+                break;
+            }
+        }
 
+        gameObject.SetActive(false);
     }
 }
