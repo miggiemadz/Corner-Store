@@ -10,6 +10,12 @@ public class MCSSManager : MonoBehaviour
     [SerializeField] MCManager MCManager;
     [SerializeField] MCTaskbar taskbar;
 
+    [Header("Window Transforming")]
+    [SerializeField] CanvasScaler scaler;
+    [SerializeField] GameObject windowedButton;
+    [SerializeField] GameObject fullscreenButton;
+    [SerializeField] BoxCollider2D boxCollider;
+
     private bool firstTimeOpen = true;
 
     void Start()
@@ -44,20 +50,34 @@ public class MCSSManager : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("ComputerWindowBar") && Input.GetMouseButton(0))
+        {
+
+        }
+    }
+
     public void XButton()
     {
         firstTimeOpen = true;
         gameObject.SetActive(false);
+        FullscreenButton();
     }
 
     public void WindowedButton()
     {
-
+        scaler.scaleFactor = .5f;
+        windowedButton.SetActive(false);
+        fullscreenButton.SetActive(true);
     }
 
     public void FullscreenButton()
     {
-
+        scaler.scaleFactor = 1f;
+        fullscreenButton.SetActive(false);
+        windowedButton.SetActive(true);
     }
 
     public void MinimizeButton()
